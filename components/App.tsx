@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, View, ScrollView, Text } from 'react-native';
 import axios from 'axios';
-
+import PhotoList from './PhotoList';
+import LoadButton from './LoadButton';
 
 interface CatPhoto {
   id: string;
@@ -24,7 +25,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Fotos de Gatos 🐱</Text>
+      <LoadButton onPress={fetchPhotos} />
       <ScrollView style={styles.scrollView}>
+        <PhotoList photos={photos} />
       </ScrollView>
     </View>
   );
