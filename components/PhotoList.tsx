@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     width: '90%',
     maxWidth: 500,
     aspectRatio: 1.5,
-    marginBottom: 10,
     borderRadius: 10,
     resizeMode: 'cover', 
   },
