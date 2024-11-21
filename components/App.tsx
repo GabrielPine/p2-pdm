@@ -1,17 +1,31 @@
 import React, { useState, useCallback } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, ScrollView, Text } from 'react-native';
+import axios from 'axios';
 
+
+interface CatPhoto {
+  id: string;
+  url: string;
+}
 
 export default function App() {
+  const [photos, setPhotos] = useState<CatPhoto[]>([]);
 
-  const testeClick = () => {
-    console.log('Botão Pressionado')
-  }
+  const fetchPhotos = useCallback(async () => {
+
+    try {
+      const response = await axios.get<CatPhoto[]>('https://api.thecatapi.com/v1/images/search?limit=5')
+      setPhotos((prevPhotos) => [...prevPhotos, ...response.data]);
+    } catch (error) {
+      console.error('Erro ao buscar fotos:', error);
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Fotos de Gatos 🐱</Text>
-      <Button title="Carregar Fotos" onPress={testeClick}/>
+      <ScrollView style={styles.scrollView}>
+      </ScrollView>
     </View>
   );
 }
@@ -32,4 +46,3 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
-
