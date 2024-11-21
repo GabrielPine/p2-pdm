@@ -16,7 +16,7 @@ export default function App() {
 
     try {
       const response = await axios.get<CatPhoto[]>('https://api.thecatapi.com/v1/images/search?limit=5')
-      setPhotos((prevPhotos) => [...prevPhotos, ...response.data]);
+      setPhotos((prevPhotos) => [...prevPhotos, ...response.data?.slice(0, 5)]);
     } catch (error) {
       console.error('Erro ao buscar fotos:', error);
     }
